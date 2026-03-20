@@ -1,10 +1,8 @@
-./main.sh
-
 import sys
-import textnode.py
+from textnode import *
 
 def main():
-    text_node = TextNode("This is some anchor text.", LINK, "https://www.boot.dev")
+    node = TextNode("This is some anchor text", TextType.LINK, "https://www.boot.dev")
+    print(node)
 
-if __name__ == "__main__":
-    sys.exit(main())
+main()
