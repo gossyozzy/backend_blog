@@ -29,3 +29,9 @@ class TestHTMLNode(unittest.TestCase):
             HTMLNode("p", value="This is yet another child node")
         ])
         node1 = HTMLNode("h1", value="Heading Node", props={"class": "heading", "id": "heading1", "data-test": "test"})
+
+
+
+
+if __name__ == "__main__":
+    unittest.main()

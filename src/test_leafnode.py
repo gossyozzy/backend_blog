@@ -28,3 +28,8 @@ class TestLeafNode(unittest.TestCase):
     def test_leaf_repr(self):
         node = LeafNode("p", "Hello, world!", props={"class": "greeting", "id": "greeting1"})
         self.assertEqual(repr(node), "LeafNode(tag=p, value=Hello, world!, props={'class': 'greeting', 'id': 'greeting1'})")
+
+
+
+if __name__ == "__main__":
+    unittest.main()

@@ -63,47 +63,47 @@ This is the same paragraph on a new line
 class TestBlockToBlockType(unittest.TestCase):
 
     def test_paragraph(self):
-        self.assertEqual(BlockType.block_to_block_type("Just a normal paragraph."), BlockType.PARAGRAPH)
-        self.assertEqual(BlockType.block_to_block_type(""), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("Just a normal paragraph."), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type(""), BlockType.PARAGRAPH)
 
     def test_heading(self):
-        self.assertEqual(BlockType.block_to_block_type("# Heading 1"), BlockType.HEADING)
-        self.assertEqual(BlockType.block_to_block_type("###### Heading 6"), BlockType.HEADING)
+        self.assertEqual(block_to_block_type("# Heading 1"), BlockType.HEADING)
+        self.assertEqual(block_to_block_type("###### Heading 6"), BlockType.HEADING)
         # Should be a paragraph if there are 7 hashes or no space
-        self.assertEqual(BlockType.block_to_block_type("####### Too many hashes"), BlockType.PARAGRAPH)
-        self.assertEqual(BlockType.block_to_block_type("#NoSpace"), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("####### Too many hashes"), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("#NoSpace"), BlockType.PARAGRAPH)
 
     def test_code_block(self):
         code = "```\nprint('hello')\n```"
-        self.assertEqual(BlockType.block_to_block_type(code), BlockType.CODE)
+        self.assertEqual(block_to_block_type(code), BlockType.CODE)
         # Fail if missing the newline after the backticks
-        self.assertEqual(BlockType.block_to_block_type("```print('hello')```"), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("```print('hello')```"), BlockType.PARAGRAPH)
 
     def test_quote_block(self):
         quote = "> Line 1\n> Line 2\n> Line 3"
-        self.assertEqual(BlockType.block_to_block_type(quote), BlockType.QUOTE)
+        self.assertEqual(block_to_block_type(quote), BlockType.QUOTE)
         # Fail if one line is missing the symbol
         bad_quote = "> Line 1\nLine 2"
-        self.assertEqual(BlockType.block_to_block_type(bad_quote), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type(bad_quote), BlockType.PARAGRAPH)
 
     def test_unordered_list(self):
         ul = "- Item 1\n- Item 2\n- Item 3"
-        self.assertEqual(BlockType.block_to_block_type(ul), BlockType.UNORDERED_LIST)
+        self.assertEqual(block_to_block_type(ul), BlockType.UNORDERED_LIST)
         # Fail if using * instead of -
-        self.assertEqual(BlockType.block_to_block_type("* Item 1"), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("* Item 1"), BlockType.PARAGRAPH)
 
     def test_ordered_list(self):
         ol = "1. First\n2. Second\n3. Third"
-        self.assertEqual(BlockType.block_to_block_type(ol), BlockType.ORDERED_LIST)
+        self.assertEqual(block_to_block_type(ol), BlockType.ORDERED_LIST)
         
     def test_ordered_list_failures(self):
         # Starts at 2 instead of 1
-        self.assertEqual(BlockType.block_to_block_type("2. Start at two"), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("2. Start at two"), BlockType.PARAGRAPH)
         # Skips a number
         bad_seq = "1. First\n3. Third"
-        self.assertEqual(BlockType.block_to_block_type(bad_seq), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type(bad_seq), BlockType.PARAGRAPH)
         # Missing the space or period
-        self.assertEqual(BlockType.block_to_block_type("1 First"), BlockType.PARAGRAPH)
+        self.assertEqual(block_to_block_type("1 First"), BlockType.PARAGRAPH)
 
 
 if __name__ == "__main__":

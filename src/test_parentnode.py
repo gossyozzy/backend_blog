@@ -27,3 +27,7 @@ class TestParentNode(unittest.TestCase):
             parent_node.to_html(),
             "<div><span><b><i>great grandchild</i></b></span></div>",
         )
+
+
+if __name__ == "__main__":
+    unittest.main()
